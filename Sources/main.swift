@@ -18,7 +18,7 @@ struct LedColor { //  GREEN          RED            BLUE
  static let Blue   = (GPIOState.Off, GPIOState.Off, GPIOState.On)
     
  static let Purple    = (GPIOState.Off, GPIOState.On,  GPIOState.On)
- static let Orange    = (GPIOState.On,  GPIOState.On,  GPIOState.Off)
+ static let Yellow    = (GPIOState.On,  GPIOState.On,  GPIOState.Off)
  static let BlueGreen = (GPIOState.On,  GPIOState.Off, GPIOState.On)
     
  static let White  = (GPIOState.On,  GPIOState.On,  GPIOState.On)
@@ -40,7 +40,7 @@ func setLedColor(color:(GPIOState, GPIOState, GPIOState), gpios:[GPIO]) {
  
 // 6 - sanity check
 guard Process.arguments.count == 2 else {
-  print("Usage: ./MultiColor off|green|red|blue|purple|orange|bg|white")
+  print("Usage: ./MultiColor off|green|red|blue|purple|yellow|bg|white")
   exit(0)
 }
  
@@ -61,7 +61,7 @@ switch color {
   case "purple":
     setLedColor(color: LedColor.Purple, gpios:gpios)
   case "orange":
-    setLedColor(color: LedColor.Orange, gpios:gpios)
+    setLedColor(color: LedColor.Yellow, gpios:gpios)
   case "bg":
     setLedColor(color: LedColor.BlueGreen, gpios:gpios)
   default:

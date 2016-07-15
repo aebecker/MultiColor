@@ -60,10 +60,10 @@ switch color {
     setLedColor(color: LedColor.White, gpios:gpios)
   case "purple":
     setLedColor(color: LedColor.Purple, gpios:gpios)
-  case "orange":
+  case "yellow":
     setLedColor(color: LedColor.Yellow, gpios:gpios)
   case "bg":
     setLedColor(color: LedColor.BlueGreen, gpios:gpios)
   default:
-    print("Invalid color")
+    print("Invalid Color: \(color)")
 }

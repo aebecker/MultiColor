@@ -19,7 +19,7 @@ struct LedColor {
 }
  
 // 4 - the ports we use 
-let gpios = [gpiodefs[.P3]!, gpiodefs[.P4]!, gpiodefs[.P4]!]
+let gpios = [gpiodefs[.P3]!, gpiodefs[.P4]!, gpiodefs[.P2]!]
 for gpio in gpios {
   gpio.direction = .OUT
   gpio.value     = GPIOState.Off.rawValue

@@ -10,30 +10,31 @@ case Off = 1
 case On  = 0
 }
  
-// 3
+// 3 Color > GPIO state mapping
 struct LedColor {
- static let Off    = (GPIOState.Off, GPIOState.Off) 
- static let Green  = (GPIOState.On,  GPIOState.Off)
- static let Orange = (GPIOState.On,  GPIOState.On)
- static let Red    = (GPIOState.Off, GPIOState.On)
+ static let Off    = (GPIOState.Off, GPIOState.Off, GPIOState.Off)
+ static let Green  = (GPIOState.On,  GPIOState.Off, GPIOState.Off)
+ static let Red    = (GPIOState.Off, GPIOState.On,  GPIOState.Off)
+ static let Blue   = (GPIOState.Off, GPIOState.Off, GPIOState.On)
 }
  
 // 4 - the ports we use 
-let gpios = [gpiodefs[.P3]!, gpiodefs[.P4]!]
+let gpios = [gpiodefs[.P3]!, gpiodefs[.P4]!, gpiodefs[.P4]!]
 for gpio in gpios {
   gpio.direction = .OUT
   gpio.value     = GPIOState.Off.rawValue
 }
  
 // 5
-func setLedColor(color:(GPIOState,GPIOState), gpios:[GPIO]) {
+func setLedColor(color:(GPIOState, GPIOState, GPIOState), gpios:[GPIO]) {
   gpios[0].value = color.0.rawValue
   gpios[1].value = color.1.rawValue
+  gpios[2].value = color.2.rawValue
 }
  
 // 6
 guard Process.arguments.count == 2 else {
-  print("Usage:  ./main off|green|orange|red")
+  print("Usage: ./MultiColor off|green|red|blue")
   exit(0)
 }
  
@@ -45,10 +46,10 @@ switch color {
     setLedColor(color: LedColor.Off, gpios:gpios)
   case "green":
     setLedColor(color: LedColor.Green, gpios:gpios)
-  case "orange":
-    setLedColor(color: LedColor.Orange, gpios:gpios)
   case "red":
     setLedColor(color: LedColor.Red, gpios:gpios)
+  case "blue":
+    setLedColor(color: LedColor.Blue, gpios:gpios)
   default:
     print("Invalid color")
 }
